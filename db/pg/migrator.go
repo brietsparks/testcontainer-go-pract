@@ -1,4 +1,4 @@
-package migration
+package pg
 
 import (
 	"database/sql"
@@ -17,7 +17,7 @@ func NewPgMigrator(db *sql.DB) (*migrate.Migrate, error) {
 		log.Fatalf("failed to get path")
 	}
 
-	sourceUrl := "file://" + filepath.Dir(path) + "/pg"
+	sourceUrl := "file://" + filepath.Dir(path) + "/migrations"
 
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
 
