@@ -10,7 +10,7 @@ import (
 
 var db *sql.DB
 
-func TestMain(m *testing.M)  {
+func TestMain(m *testing.M) {
 	ctx := context.Background()
 
 	container, database, err := pg.CreateTestContainer(ctx, "testdb")
@@ -29,7 +29,7 @@ func TestMain(m *testing.M)  {
 	}
 
 	db = database
-    m.Run()
+	m.Run()
 
 	err = database.Close()
 	if err != nil {

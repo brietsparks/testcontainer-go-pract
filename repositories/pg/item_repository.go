@@ -7,21 +7,22 @@ import (
 	"github.com/google/uuid"
 	_ "github.com/lib/pq"
 	"pract-testcontainers/entities"
+	"pract-testcontainers/repositories"
 )
 
-type ItemsRepository struct {
+type ItemRepository struct {
 	db *sql.DB
 }
 
-func NewItemsRepository(db *sql.DB) *ItemsRepository {
-	return &ItemsRepository{db: db}
+func NewItemRepository(db *sql.DB) repositories.ItemRepository {
+	return &ItemRepository{db: db}
 }
 
 const createItem = `
-	insert into items(id, description) 
-	values ($1, $2)`
+insert into items(id, description) 
+values ($1, $2)`
 
-func (r *ItemsRepository) CreateItem(ctx context.Context, description string) (*entities.Item, error) {
+func (r *ItemRepository) CreateItem(ctx context.Context, description string) (*entities.Item, error) {
 	id := uuid.New()
 	_, err := r.db.ExecContext(ctx, createItem, id, description)
 	if err != nil {
@@ -31,11 +32,11 @@ func (r *ItemsRepository) CreateItem(ctx context.Context, description string) (*
 }
 
 const getItem = `
-	select id, description 
-	from items
-	where id = $1`
+select id, description 
+from items
+where id = $1`
 
-func (r *ItemsRepository) GetItem(ctx context.Context, id string) (*entities.Item, error) {
+func (r *ItemRepository) GetItem(ctx context.Context, id string) (*entities.Item, error) {
 	var item entities.Item
     err := r.db.
     	QueryRowContext(ctx, getItem, id).

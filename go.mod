@@ -13,7 +13,6 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/lib/pq v1.8.0
 	github.com/sirupsen/logrus v1.7.0 // indirect
-	github.com/stretchr/testify v1.6.1
 	github.com/testcontainers/testcontainers-go v0.9.0
 	golang.org/x/net v0.0.0-20201109172640-a11eb1b685be // indirect
 	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9 // indirect
